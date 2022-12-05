@@ -1,0 +1,167 @@
+version: "2.0"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+
+## Main menu\
+
+- intent: track_existing_order
+  examples: |
+    - Track Existing order
+    - track_existing_order
+    - existing order tracking
+
+- intent: place_a_new_order
+  examples: |
+    - Place a new order
+    - new order place
+    - place_a_new_order
+
+- intent: enquiry_on_a_existing_order
+  examples: |
+    - Enquiry on existing order
+    - existing order enquiry
+    - detail of a existing order
+
+- intent: live_agent
+  examples: |
+    - live_agent
+    - live agent
+    - connect to a human
+
+### Track Existing order
+
+- intent: Hyperlocal
+  examples: |
+    - Hyperlocal
+    - hyperlocal market
+    - localhyper
+
+
+- intent: International
+  examples: |
+    - International
+    - international order
+    - overseas order
+
+### Place a new order
+
+
+- intent: initiate_a_order
+  examples: |
+    - initiate a order
+    - initiate_a_order
+    - order initiation
+
+- intent: FAQ
+  examples: |
+    - FAQ
+    - faq
+    - frequently asked questions
+
+
+- intent: local
+  examples: |
+    - local
+    - nearby
+    - nearby market
+
+- intent: within_city
+  examples: |
+    - within_city
+    - within city
+    - inside a city
+
+- intent: outside_city
+  examples: |
+    - outside_city
+    - outside city
+    - away from a city

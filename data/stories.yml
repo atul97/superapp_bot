@@ -1,0 +1,92 @@
+version: "2.0"
+
+stories:
+
+# - story: happy path
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: mood_great
+#   - action: utter_happy
+
+# - story: sad path 1
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: mood_unhappy
+#   - action: utter_cheer_up
+#   - action: utter_did_that_help
+#   - intent: affirm
+#   - action: utter_happy
+
+# - story: sad path 2
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: mood_unhappy
+#   - action: utter_cheer_up
+#   - action: utter_did_that_help
+#   - intent: deny
+#   - action: utter_goodbye
+
+- story: main_menu
+  steps:
+  - intent: greet
+  - action: utter_main_menu
+
+- story: track_existing_order
+  steps:
+  - intent: track_existing_order
+  - action: utter_order_region_type
+
+- story: place_a_new_order
+  steps:
+  - intent: place_a_new_order
+  - action: utter_place_new_order_faq
+
+- story: enquiry_on_a_existing_order
+  steps:
+  - intent: enquiry_on_a_existing_order
+  - action: utter_enquiry_on_a_existing_order
+
+- story: live_agent
+  steps:
+  - intent: live_agent
+  - action: utter_live_agent
+
+# - story: Hyperlocal
+#   steps:
+#   - intent: Hyperlocal
+#   - action: action_order_detail
+
+# - story: International
+#   steps:
+#   - intent: International
+#   - action: action_order_detail
+
+- story: initiate_a_order
+  steps:
+  - intent: initiate_a_order
+  - action: utter_place_new_order
+
+- story: FAQ
+  steps:
+  - intent: FAQ
+  - action: utter_faq
+
+############
+- story: local
+  steps:
+  - intent: local
+  - action: utter_place_local_order
+
+
+- story: within_city
+  steps:
+  - intent: within_city
+  - action: utter_place_within_city_order
+
+- story: outside_city
+  steps:
+  - intent: outside_city
+  - action: utter_place_outside_city_order

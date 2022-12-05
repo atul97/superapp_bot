@@ -1,0 +1,170 @@
+version: "2.0"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - track_existing_order
+  - place_a_new_order
+  - enquiry_on_a_existing_order
+  - live_agent
+  - Hyperlocal
+  - International
+  - initiate_a_order
+  - FAQ
+  - local
+  - within_city
+  - outside_city
+
+entities:
+- mobile
+- country_code
+- otp
+
+slots:
+  mobile:
+    type: text
+    influence_conversation: false
+  country_code:
+    type: text
+    influence_conversation: false
+  otp:
+    type: text
+    influence_conversation: false
+
+responses:
+  utter_greet:
+  - text: "Hi, Welcome to ABC a Super-App for all your delivery needs"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+  # utter_select_user_type:
+  # - buttons:
+  #   - payload: new_user
+  #     title: New User
+  #   - payload: existing_user
+  #     title: Existing User
+  #   text: Please select type of user.
+
+
+  utter_main_menu:
+  - buttons:
+    - payload: Track Existing order
+      title: Track Existing order
+    - payload: Place a new order
+      title: Place a new order
+    - payload: Enquiry on existing order
+      title: Enquiry on existing order
+    - payload: Connect to a live agent
+      title: Connect to a live agent
+    text: Hi,How can i help you with.
+
+### Track Existing order
+  utter_order_region_type:
+  - buttons:
+    - payload: Hyperlocal
+      title: Hyperlocal
+    - payload: International
+      title: International
+    text: Select order region.
+
+
+### Place a new order
+
+  utter_place_new_order_faq:
+  - buttons:
+    - payload: initiate a order
+      title: Place a new order
+    - payload: FAQ
+      title: FAQ
+    text: Please select.
+
+  utter_place_new_order:
+  - buttons:
+    - payload: local
+      title: Local
+    - payload: within city
+      title: Within city
+    - payload: outside city
+      title: Outside city
+    text: Please select your order type.
+
+  utter_place_local_order:
+  - text: "Place local order -Link..........."
+
+  utter_place_within_city_order:
+  - text: "Place Within city order -Link..........."
+
+  utter_place_outside_city_order:
+  - text: "Place Outside city order -Link..........."
+
+  utter_faq:
+  - text: "Place Outside city order -Link..........." ###FAQs need to add
+
+
+### Enquiry of an existing order
+
+  #######DB show
+
+  utter_enquiry_on_a_existing_order:
+  - text: "Enquiry on a existing order"
+
+
+### Live Agent
+
+  utter_live_agent:
+  - text: "Live Agent - Dvelopment"
+
+
+  utter_ask_mobile:
+  - text: "Please enter mobile number"
+
+  utter_ask_otp:
+  - text: "Please enter OTP"
+
+  utter_ask_country_code:
+  - text: "Please enter your country code"
+
+forms:
+  mobile_form:
+    required_slots:  
+      mobile:
+      - entity: mobile
+        type: from_text
+  country_code_form:
+    required_slots:  
+      country_code:
+      - entity: country_code
+        type: from_text 
+  otp_form:
+    required_slots:  
+      otp:
+      - entity: otp
+        type: from_text 
+
+
+actions:
+- action_sendotp
+- action_verify_otp
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
