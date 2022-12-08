@@ -1,0 +1,20 @@
+version: "2.0"
+
+nlu:
+- intent: what_is_the_price
+  examples: |
+    - what_is_the_price
+    - what is the price
+    - how much is the price
+
+- intent: shipping_cost
+  examples: |
+    - shipping_cost
+    - shipping cost
+    - ship cost
+
+- intent: time_to_take_to_deliver
+  examples: |
+    - time_to_take_to_deliver
+    - time taken to deliver
+    - delivery time

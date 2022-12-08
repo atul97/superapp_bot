@@ -20,6 +20,9 @@ intents:
   - within_city
   - outside_city
   - add_customer
+  - what_is_the_price
+  - shipping_cost
+  - time_to_take_to_deliver
 
 entities:
 - mobile
@@ -125,17 +128,40 @@ responses:
     text: Please select your order type.
 
   utter_place_local_order:
-  - text: "Place local order -Link..........."
+  - text: Place local order <a href="https://www.google.com/" target="_blank"> Click here </a>
 
   utter_place_within_city_order:
-  - text: "Place Within city order -Link..........."
+  - text: Place Within city order <a href="https://www.google.com/" target="_blank"> Click here </a>
 
   utter_place_outside_city_order:
-  - text: "Place Outside city order -Link..........."
+  - text: Place Outside city order <a href="https://www.google.com/" target="_blank"> Click here </a>
 
   utter_faq:
-  - text: "FAQs" ###FAQs need to add
+  - buttons:
+    - payload: what_is_the_price
+      title: How much is the price
+    - payload: shipping_cost
+      title: Shipping cost
+    - payload: time_to_take_to_deliver
+      title: Time taken to deliver
+    text: Please select your order type.
 
+  utter_what_is_the_price:
+  - text: "Price of the item 2000 INR"
+
+  utter_shipping_cost:
+  - text: |
+      - Shipping Cost:
+      - Within City. ₹40.00.
+      - Rest Of India. ₹80.00.
+      - Special. ₹100.00.
+
+  utter_time_to_take_to_deliver:
+  - text: |
+      - Delivery time:  
+      - Within City - Delivery time Upto 1-2 days.
+      - Rest Of India - Delivery time Upto 3-6 days.
+      - Special - Delivery time Upto 6-8 days.
 
 ### Enquiry of an existing order
 

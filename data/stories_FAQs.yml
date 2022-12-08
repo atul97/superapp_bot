@@ -1,0 +1,23 @@
+version: "2.0"
+
+stories:
+
+- story: what_is_the_price
+  steps:
+  - intent: what_is_the_price
+  - action: utter_what_is_the_price
+
+
+- story: shipping_cost
+  steps:
+  - intent: shipping_cost
+  - action: utter_shipping_cost
+
+
+- story: time_to_take_to_deliver
+  steps:
+  - intent: time_to_take_to_deliver
+  - action: utter_time_to_take_to_deliver
+
+
+
