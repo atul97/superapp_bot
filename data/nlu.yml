@@ -90,6 +90,13 @@ nlu:
     - am I talking to a bot?
     - am I talking to a human?
 
+## User verification
+
+- intent: add_customer
+  examples: |
+    - Add customer
+    - add_customer
+    - new customer add
 
 ## Main menu\
 

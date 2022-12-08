@@ -32,12 +32,29 @@ stories:
 - story: main_menu
   steps:
   - intent: greet
-  - action: utter_main_menu
+  - action: utter_greet
+  - action: mobile_form
+  - action: country_code_form
+  - action: action_sendotp
+  - action: otp_form
+  - action: action_verify_otp
+  - action: action_check_customer
+  # - action: utter_main_menu
+
+- story: add_customer
+  steps:
+  - intent: add_customer
+  - action: customer_name_form
+  - action: country_code_form
+  - action: action_add_customer
 
 - story: track_existing_order
   steps:
   - intent: track_existing_order
   - action: utter_order_region_type
+  - action: order_type_form
+  - action: action_existing_order
+  - action: utter_post_solution_menu
 
 - story: place_a_new_order
   steps:
@@ -79,14 +96,17 @@ stories:
   steps:
   - intent: local
   - action: utter_place_local_order
+  - action: utter_post_solution_menu
 
 
 - story: within_city
   steps:
   - intent: within_city
   - action: utter_place_within_city_order
+  - action: utter_post_solution_menu
 
 - story: outside_city
   steps:
   - intent: outside_city
   - action: utter_place_outside_city_order
+  - action: utter_post_solution_menu

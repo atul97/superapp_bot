@@ -19,11 +19,16 @@ intents:
   - local
   - within_city
   - outside_city
+  - add_customer
 
 entities:
 - mobile
 - country_code
 - otp
+- user_existence
+- order_type
+- customer_name
+- authentic_user
 
 slots:
   mobile:
@@ -33,6 +38,18 @@ slots:
     type: text
     influence_conversation: false
   otp:
+    type: text
+    influence_conversation: false
+  user_existence:
+    type: text
+    influence_conversation: false
+  order_type:
+    type: text
+    influence_conversation: false
+  customer_name:
+    type: text
+    influence_conversation: false
+  authentic_user:
     type: text
     influence_conversation: false
 
@@ -117,7 +134,7 @@ responses:
   - text: "Place Outside city order -Link..........."
 
   utter_faq:
-  - text: "Place Outside city order -Link..........." ###FAQs need to add
+  - text: "FAQs" ###FAQs need to add
 
 
 ### Enquiry of an existing order
@@ -134,6 +151,13 @@ responses:
   - text: "Live Agent - Dvelopment"
 
 
+  utter_post_solution_menu:
+  - buttons:
+    - payload: explore_more
+      title: Explore More
+    text: Is there anything else I can help you with?
+
+
   utter_ask_mobile:
   - text: "Please enter mobile number"
 
@@ -142,6 +166,9 @@ responses:
 
   utter_ask_country_code:
   - text: "Please enter your country code"
+
+  utter_ask_customer_name:
+  - text: "Please enter your name"
 
 forms:
   mobile_form:
@@ -159,11 +186,33 @@ forms:
       otp:
       - entity: otp
         type: from_text 
-
+  user_existence_form:
+    required_slots:  
+      user_existence:
+      - entity: user_existence
+        type: from_text 
+  order_type_form:
+    required_slots:  
+      order_type:
+      - entity: order_type
+        type: from_text 
+  customer_name_form:
+    required_slots:  
+      customer_name:
+      - entity: customer_name
+        type: from_text 
+  authentic_user_form:
+    required_slots:  
+      authentic_user:
+      - entity: authentic_user
+        type: from_text 
 
 actions:
 - action_sendotp
 - action_verify_otp
+- action_check_customer
+- action_existing_order
+- action_add_customer
 
 session_config:
   session_expiration_time: 60
