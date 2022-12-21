@@ -20,4 +20,8 @@ stories:
   - action: utter_time_to_take_to_deliver
 
 
+- story: carousel
+  steps:
+  - intent: carousel
+  - action: action_resources_list
 

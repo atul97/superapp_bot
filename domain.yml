@@ -23,6 +23,7 @@ intents:
   - what_is_the_price
   - shipping_cost
   - time_to_take_to_deliver
+  - carousel
 
 entities:
 - mobile
@@ -74,7 +75,7 @@ responses:
   - text: "Bye"
 
   utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+  - text: "I am a bot, powered by AI."
 
   # utter_select_user_type:
   # - buttons:
@@ -151,7 +152,7 @@ responses:
 
   utter_shipping_cost:
   - text: |
-      - Shipping Cost:
+      - Shipping Cost.
       - Within City. ₹40.00.
       - Rest Of India. ₹80.00.
       - Special. ₹100.00.
@@ -196,6 +197,9 @@ responses:
   utter_ask_customer_name:
   - text: "Please enter your name"
 
+  utter_please_rephrase:
+  - text: I'm sorry, I didn't quite understand that. Could you rephrase?
+
 forms:
   mobile_form:
     required_slots:  
@@ -239,6 +243,8 @@ actions:
 - action_check_customer
 - action_existing_order
 - action_add_customer
+- action_resources_list
+- action_enquiry_existing_order
 
 session_config:
   session_expiration_time: 60

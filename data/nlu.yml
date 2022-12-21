@@ -174,3 +174,8 @@ nlu:
     - away from a city
 
  
+- intent: carousel
+  examples: |
+    - carousel
+    - carousel card
+    - resource list

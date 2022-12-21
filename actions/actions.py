@@ -261,3 +261,178 @@ class ActionAddCustomer(Action):
 
         
         return [SlotSet('order_type',None)]
+
+
+class ActionEnquiryExistingOrder(Action):
+
+    def name(self) -> Text:
+        return "action_enquiry_existing_order"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # authentic_user = tracker.get_slot("authentic_user") 
+        authentic_user = "True"
+
+        if authentic_user =="True":
+            conn = None
+            try:
+                print("-----------")
+                # mobile = tracker.get_slot("mobile")
+                # order_type = tracker.get_slot("order_type")
+                # order_type = order_type.lower()
+                mobile = "9953635285"
+                order_type = "hyperlocal"
+                conn = psycopg2.connect(database ="sapp", user = "postgres",
+                            password = "123456", host = "localhost", 
+                            port = "5432")
+                print("Connection Successful to PostgreSQL")
+
+                cur = conn.cursor()
+                
+                query = f"""select * from orders where phone_number = '{mobile}' and order_type = '{order_type}';"""
+                cur.execute(query)
+                rows = cur.fetchall()
+                for i in rows :
+                    dispatcher.utter_message(text=f"Data: {i[2]} , Status: {i[3]}, Amount: {i[4]}")
+
+                
+                cur.close()
+            except (Exception, psycopg2.DatabaseError) as error:
+                
+                print(error)
+            finally:
+                if conn is not None:
+                    conn.close()
+                    print('Database connection closed.')
+            if len(rows)==0:
+                dispatcher.utter_message(text=f"No details found for user with contact: {mobile}  for {order_type} order")
+        else:
+            dispatcher.utter_message(text=f"Please authenticate")
+        return [SlotSet('order_type',None)]
+
+
+class ActionResourcesList(Action):
+
+    def name(self) -> Text:
+        return "action_resources_list"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        test_carousel = {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "Innovate Youself",
+                    "subtitle": "Get It, Make it.",
+                    "image_url": "static/test.jpg",
+                    "buttons": [{
+                        "title": "Innovate Yourself",
+                        "url": "https://www.innovationyourself.com/",
+                        # "https://yt3.ggpht.com/ytc/AAUvwnhZwcqP89SH71KugPDfltbcpBajoPpxihN7aPGOmzE=s900-c-k-c0x00ffffff-no-rj",
+                        "type": "web_url"
+                    },
+                        {
+                            "title": "Innovate Yourself",
+                            "type": "postback",
+                            "payload": "/greet"
+                        }
+                    ]
+                },
+                    {
+                        "title": "RASA CHATBOT",
+                        "subtitle": "Conversational AI",
+                        "image_url": "static/rasa.png",
+                        "buttons": [{
+                            "title": "Rasa",
+                            "url": "https://www.rasa.com",
+                            "type": "web_url"
+                        },
+                            {
+                                "title": "Rasa Chatbot",
+                                "type": "postback",
+                                "payload": "/greet"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+        covid_resources = {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "MBMC",
+                    "subtitle": "FIND BED, SAVE LIFE.",
+                    "image_url": "static/hospital-beds-application.jpg",
+                    "buttons": [{
+                        "title": "Hospital Beds Availability",
+                        "url": "https://www.covidbedmbmc.in/",
+                        "type": "web_url"
+                    },
+                        {
+                            "title": "MBMC",
+                            "type": "postback",
+                            "payload": "/affirm"
+                        }
+                    ]
+                },
+                    {
+                        "title": "COVID.ARMY",
+                        "subtitle": "OUR NATION, SAVE NATION.",
+                        "image_url": "static/oxygen-cylinder-55-cft-500x554-500x500.jpg",
+                        "buttons": [{
+                            "title": "COVID ARMY",
+                            "url": "https://covid.army/",
+                            "type": "web_url"
+                        },
+                            {
+                                "title": "COVID ARMY",
+                                "type": "postback",
+                                "payload": "/deny"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Innovate Youself",
+                        "subtitle": "Get It, Make it.",
+                        "image_url": "static/test.jpg",
+                        "buttons": [{
+                            "title": "Innovate Yourself",
+                            "url": "https://www.innovationyourself.com/",
+                            # "https://yt3.ggpht.com/ytc/AAUvwnhZwcqP89SH71KugPDfltbcpBajoPpxihN7aPGOmzE=s900-c-k-c0x00ffffff-no-rj",
+                            "type": "web_url"
+                        },
+                            {
+                                "title": "Innovate Yourself",
+                                "type": "postback",
+                                "payload": "/greet"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "RASA CHATBOT",
+                        "subtitle": "Conversational AI",
+                        "image_url": "static/rasa.png",
+                        "buttons": [{
+                            "title": "Rasa",
+                            "url": "https://www.rasa.com",
+                            "type": "web_url"
+                        },
+                            {
+                                "title": "Rasa Chatbot",
+                                "type": "postback",
+                                "payload": "/greet"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+
+        dispatcher.utter_message(attachment=test_carousel)
+        return []

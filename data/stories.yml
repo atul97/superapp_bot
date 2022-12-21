@@ -64,7 +64,10 @@ stories:
 - story: enquiry_on_a_existing_order
   steps:
   - intent: enquiry_on_a_existing_order
-  - action: utter_enquiry_on_a_existing_order
+  # - action: utter_order_region_type
+  # - action: order_type_form
+  - action: action_enquiry_existing_order
+  - action: utter_post_solution_menu
 
 - story: live_agent
   steps:
