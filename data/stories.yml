@@ -48,6 +48,13 @@ stories:
   - action: country_code_form
   - action: action_add_customer
 
+
+- story: activate_customer
+  steps:
+  - intent: activate_customer
+  - action: action_activate_customer
+  - action: utter_main_menu
+
 - story: track_existing_order
   steps:
   - intent: track_existing_order
@@ -112,4 +119,10 @@ stories:
   steps:
   - intent: outside_city
   - action: utter_place_outside_city_order
+  - action: utter_post_solution_menu
+
+- story: deactivate_customer
+  steps:
+  - intent: deactivate_customer
+  - action: action_deactivate_customer
   - action: utter_post_solution_menu

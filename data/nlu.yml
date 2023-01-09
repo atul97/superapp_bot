@@ -179,3 +179,16 @@ nlu:
     - carousel
     - carousel card
     - resource list
+
+- intent: activate_customer
+  examples: |
+    - activate_customer
+    - activate customer
+    - customer membership reactivate
+
+- intent: deactivate_customer
+  examples: |
+    - deactivate_customer
+    - deactivate customer mebersip
+    - stop membership of customer
+    - unsubscribe customer membership

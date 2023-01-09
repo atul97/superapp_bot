@@ -24,6 +24,8 @@ intents:
   - shipping_cost
   - time_to_take_to_deliver
   - carousel
+  - activate_customer
+  - deactivate_customer
 
 entities:
 - mobile
@@ -54,6 +56,9 @@ slots:
     type: text
     influence_conversation: false
   authentic_user:
+    type: text
+    influence_conversation: false
+  last_write_timestamp:
     type: text
     influence_conversation: false
 
@@ -175,7 +180,7 @@ responses:
 ### Live Agent
 
   utter_live_agent:
-  - text: "Live Agent - Dvelopment"
+  - text: "Live Agent - Development"
 
 
   utter_post_solution_menu:
@@ -199,6 +204,8 @@ responses:
 
   utter_please_rephrase:
   - text: I'm sorry, I didn't quite understand that. Could you rephrase?
+
+
 
 forms:
   mobile_form:
@@ -245,6 +252,8 @@ actions:
 - action_add_customer
 - action_resources_list
 - action_enquiry_existing_order
+- action_activate_customer
+- action_deactivate_customer
 
 session_config:
   session_expiration_time: 60
