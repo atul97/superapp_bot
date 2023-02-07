@@ -16,6 +16,7 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
+    - explore_more
 
 - intent: goodbye
   examples: |
@@ -189,6 +190,7 @@ nlu:
 - intent: deactivate_customer
   examples: |
     - deactivate_customer
-    - deactivate customer mebersip
+    - deactivate customer mebership
     - stop membership of customer
     - unsubscribe customer membership
+    - deactivate customer subscription

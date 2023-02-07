@@ -93,10 +93,10 @@ responses:
 
   utter_main_menu:
   - buttons:
-    - payload: Track Existing order
+    - payload: track_existing_order
       title: Track Existing order
     - payload: Place a new order
-      title: Place a new order
+      title: Place a order/FAQ
     - payload: Enquiry on existing order
       title: Enquiry on existing order
     - payload: Connect to a live agent
@@ -254,6 +254,7 @@ actions:
 - action_enquiry_existing_order
 - action_activate_customer
 - action_deactivate_customer
+- action_default_fallback
 
 session_config:
   session_expiration_time: 60

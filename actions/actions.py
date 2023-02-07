@@ -205,11 +205,11 @@ class ActionCheckCustomer(Action):
 
                 else:
                     buttons = []
-                    buttons.append({"title": "Activate customer" , "payload": "activate_customer"})
+                    buttons.append({"title": "Activate customer subscription" , "payload": "activate_customer"})
                     buttons.append({"title": "Explore More" , "payload": "explore_more"})
-                    dispatcher.utter_message(text="Want to activate customer",buttons=buttons)
+                    dispatcher.utter_message(text="Want to activate customer subscription",buttons=buttons)
             else:
-                dispatcher.utter_message(text="User existed")
+                # dispatcher.utter_message(text="User existed")
                 dispatcher.utter_message(template=f"utter_main_menu")
         else:
             dispatcher.utter_message(text=f"Please authenticate")
@@ -290,6 +290,7 @@ class ActionDeactivateCustomer(Action):
 
                 
                 cur.close()
+                dispatcher.utter_message(text=f"Customer subscription has been deactivated")
             except (Exception, psycopg2.DatabaseError) as error:
                 
                 print(error)
@@ -316,14 +317,14 @@ class ActionExistingOrder(Action):
         if authentic_user =="True":
             conn = None
             try:
-                print("-----------")
+                # print("-----------")
                 mobile = tracker.get_slot("mobile")
                 order_type = tracker.get_slot("order_type")
                 order_type = order_type.lower()
                 conn = psycopg2.connect(database ="sapp", user = "postgres",
                             password = "123456", host = "localhost", 
                             port = "5432")
-                print("Connection Successful to PostgreSQL")
+                # print("Connection Successful to PostgreSQL")
 
                 cur = conn.cursor()
                 
@@ -341,7 +342,7 @@ class ActionExistingOrder(Action):
             finally:
                 if conn is not None:
                     conn.close()
-                    print('Database connection closed.')
+                    # print('Database connection closed.')
             if len(rows)==0:
                 dispatcher.utter_message(text=f"No details found for user with contact: {mobile}  for {order_type} order")
         else:
@@ -364,14 +365,14 @@ class ActionAddCustomer(Action):
         if authentic_user =="True":        
             conn = None
             try:
-                print("-----------")
+                # print("-----------")
                 mobile = tracker.get_slot("mobile")
                 customer_name = tracker.get_slot("customer_name")
                 country_code = tracker.get_slot("country_code")
                 conn = psycopg2.connect(database ="sapp", user = "postgres",
                             password = "123456", host = "localhost", 
                             port = "5432")
-                print("Connection Successful to PostgreSQL")
+                # print("Connection Successful to PostgreSQL")
 
                 cur = conn.cursor()
                 
@@ -390,7 +391,7 @@ class ActionAddCustomer(Action):
             finally:
                 if conn is not None:
                     conn.close()
-                    print('Database connection closed.')
+                    # print('Database connection closed.')
         else:
             dispatcher.utter_message(text=f"Please authenticate")
 
@@ -413,7 +414,7 @@ class ActionEnquiryExistingOrder(Action):
         if authentic_user =="True":
             conn = None
             try:
-                print("-----------")
+                # print("-----------")
                 # mobile = tracker.get_slot("mobile")
                 # order_type = tracker.get_slot("order_type")
                 # order_type = order_type.lower()
@@ -422,7 +423,7 @@ class ActionEnquiryExistingOrder(Action):
                 conn = psycopg2.connect(database ="sapp", user = "postgres",
                             password = "123456", host = "localhost", 
                             port = "5432")
-                print("Connection Successful to PostgreSQL")
+                # print("Connection Successful to PostgreSQL")
 
                 cur = conn.cursor()
                 
@@ -440,7 +441,7 @@ class ActionEnquiryExistingOrder(Action):
             finally:
                 if conn is not None:
                     conn.close()
-                    print('Database connection closed.')
+                    # print('Database connection closed.')
             if len(rows)==0:
                 dispatcher.utter_message(text=f"No details found for user with contact: {mobile}  for {order_type} order")
         else:
@@ -624,6 +625,51 @@ class ActionResourcesList(Action):
 
 
 
+# class ActionRemoveCustomer(Action):
+
+#     def name(self) -> Text:
+#         return "action_remove_customer"
+
+#     def run(self, dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+#         authentic_user = "True"
+
+#         if authentic_user =="True":
+#             conn = None
+#             try:
+#                 print("-----------")
+
+#                 mobile = "9953635285"
+#                 order_type = "hyperlocal"
+#                 conn = psycopg2.connect(database ="sapp", user = "postgres",
+#                             password = "123456", host = "localhost", 
+#                             port = "5432")
+#                 print("Connection Successful to PostgreSQL")
+
+#                 cur = conn.cursor()
+                
+#                 query = f"""select * from orders where phone_number = '{mobile}' and order_type = '{order_type}';"""
+#                 cur.execute(query)
+#                 rows = cur.fetchall()
+#                 for i in rows :
+#                     dispatcher.utter_message(text=f"Data: {i[2]} , Status: {i[3]}, Amount: {i[4]}")
+
+                
+#                 cur.close()
+#             except (Exception, psycopg2.DatabaseError) as error:
+                
+#                 print(error)
+#             finally:
+#                 if conn is not None:
+#                     conn.close()
+#                     print('Database connection closed.')
+#             if len(rows)==0:
+#                 dispatcher.utter_message(text=f"No details found for user with contact: {mobile}  for {order_type} order")
+#         else:
+#             dispatcher.utter_message(text=f"Please authenticate")
+#         return [SlotSet('order_type',None)]
 
 
 
@@ -674,3 +720,23 @@ class ActionResourcesList(Action):
 #         else:
 #             dispatcher.utter_message(text=f"Please authenticate")
 #         return [SlotSet('order_type',None)]
+
+
+
+class ActionDefaultFallback(Action):
+    """Executes the fallback action and goes back to the previous state
+    of the dialogue"""
+
+    def name(self) -> Text:
+        return "action_default_fallback"
+
+    async def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+        dispatcher.utter_message(template="utter_please_rephrase")
+
+        # Revert user message which led to fallback.
+        return []
